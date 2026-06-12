@@ -24,7 +24,22 @@ public class StudentService {
         .map(this::mapToUserResponse)
         .collect(Collectors.toList());
     } 
-    public String addStudent(Student student){
+    public String addStudent(StudentRequest studentRequest){
+        Student student = new Student();
+        student.setFirstName(studentRequest.getFirstName());
+        student.setLastName(studentRequest.getLastName());
+        student.setEmail(studentRequest.getEmail());
+        student.setPhoneNumber(studentRequest.getPhoneNumber());
+        student.setUserRole(studentRequest.getRole());
+        if (studentRequest.getAddress() != null) {
+            Address address = new Address();
+            address.setStreet(studentRequest.getAddress().getStreet());
+            address.setCity(studentRequest.getAddress().getCity());
+            address.setState(studentRequest.getAddress().getState());
+            address.setZipCode(studentRequest.getAddress().getZipCode());
+            address.setCountry(studentRequest.getAddress().getCountry());
+            student.setAddress(address);
+        }
         studentRepository.save(student);
         return "Student added Successfully";
     }
@@ -46,6 +61,7 @@ public class StudentService {
             Address address = student.getAddress();
             if(address == null){
                 address = new Address();
+                student.setAddress(address);
             }
             address.setStreet(s.getAddress().getStreet());
             address.setCity(s.getAddress().getCity());

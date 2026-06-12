@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.employee.management.model.Student;
 import com.employee.management.service.StudentService;
 import com.employee.management.dto.StudentRequest;
 import com.employee.management.dto.StudentResponse;
@@ -27,8 +26,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
     @PostMapping("/students")
-    public ResponseEntity <String> addStudent(@RequestBody Student student){ 
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(student));
+    public ResponseEntity <String> addStudent(@RequestBody StudentRequest studentRequest){ 
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(studentRequest));
     }
     @GetMapping("/students/{id}")
     public ResponseEntity <StudentResponse> getStudent(@PathVariable Long id){
