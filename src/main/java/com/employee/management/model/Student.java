@@ -21,9 +21,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+
+    private Long id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -32,7 +34,6 @@ public class Student {
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address-id", referencedColumnName = "id") 
-    
     private Address address;
     
     @CreationTimestamp

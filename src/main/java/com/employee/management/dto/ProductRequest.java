@@ -14,4 +14,5 @@ public class ProductRequest {
     private Integer stockQuantity;
     private String imageUrl;
     private Boolean active = true;
+    
 }
