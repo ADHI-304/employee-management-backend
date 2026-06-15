@@ -26,38 +26,53 @@ public class StudentController {
 
     @GetMapping("/students")
     public ResponseEntity <List<StudentResponse>> getStudents(){
+
         return ResponseEntity.ok(studentService.getAllStudents());
+
     }
 
     @PostMapping("/students")
     public ResponseEntity <String> addStudent(@RequestBody StudentRequest studentRequest){ 
+
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(studentRequest));
+
     }
 
     @GetMapping("/students/{id}")
     public ResponseEntity <StudentResponse> getStudent(@PathVariable Long id){
+
         StudentResponse response = studentService.getStudentById(id);
+
         if(response == null){
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(response);
+
     }
 
     @PutMapping("/students/{id}")
     public ResponseEntity <StudentResponse> updateStudent(@PathVariable Long id, @RequestBody StudentRequest student){
+
         StudentResponse res = studentService.updateStudent(id, student);
+
         if(res == null){
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(res);
+
     }
     
     @DeleteMapping("/students/{id}")
     public ResponseEntity <String> deleteStudent(@PathVariable Long id){
+
         String res = studentService.deleteStudent(id);
+
         if(res.equals("Student Not Found")){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
         }
+        
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

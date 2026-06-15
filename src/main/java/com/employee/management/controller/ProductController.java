@@ -30,33 +30,45 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity <ProductResponse> createProduct(@RequestBody ProductRequest productRequest){
+
         return new ResponseEntity <ProductResponse> (productService.addProduct(productRequest), HttpStatus.CREATED);
+
     }
 
     @GetMapping
     public ResponseEntity <List<ProductResponse>> getAllProducts(){
+
         return ResponseEntity.ok(productService.getAllProducts());
 
     }
+
     @GetMapping("/{id}")
     public ResponseEntity <ProductResponse> getProductById(@PathVariable Long id){
+
         return ResponseEntity.ok(productService.getProductById(id));
+
     }
 
     @PutMapping("/{id}")
     public ResponseEntity <ProductResponse> updateProduct(@PathVariable Long id, @RequestBody ProductRequest productRequest){
+
         return productService.updateProduct(id, productRequest)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity <String> deleteProduct(@PathVariable Long id){
+
         return ResponseEntity.ok(productService.deleteProduct(id));
+
     }
 
     @GetMapping("/search")
     public ResponseEntity <List<ProductResponse>> searchProducts(@RequestParam String s){
+
         return ResponseEntity.ok(productService.searchProducts(s));
+        
     }
 }

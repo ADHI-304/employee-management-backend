@@ -44,17 +44,22 @@ public class CartController {
     public ResponseEntity <Void> removeFromCart(
         @RequestHeader("X-Student-ID") Long studentId,
         @PathVariable Long productId){
-            boolean deleted = cartService.deleteFromCart(studentId, productId);
+
+        boolean deleted = cartService.deleteFromCart(studentId, productId);
+
         if(!deleted){
             return ResponseEntity.badRequest().build();
         }    
+
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
     public ResponseEntity <List<CartItemResponse>> getCart(
+
         @RequestHeader("X-Student-ID") Long studentId) {
             return ResponseEntity.ok(cartService.getCart(studentId));
+            
     }
 
 }

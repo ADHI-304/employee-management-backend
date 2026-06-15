@@ -20,4 +20,7 @@ public interface CartRepository extends JpaRepository <CartItem, Long> {
 
     List <CartItem> findByStudent(Student student);
 
+    @Transactional
+    void deleteByStudent(Student student);  
+
 }
